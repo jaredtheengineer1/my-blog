@@ -1,4 +1,4 @@
-@import url("design-tokens.css");
+@import url("tokens.css");
 /*
   BUTTON STYLES
   Uses component tokens from design-tokens.css
@@ -8,7 +8,7 @@
 .button {
   font-size: var(--button-font-size-md);
   font-weight: var(--button-font-weight);
-  letter-spacing: var(--buton-letter-spacing);
+  letter-spacing: var(--button-letter-spacing);
   line-height: var(--button-line-height);
   border-radius: var(--button-border-radius);
   border: 0;
