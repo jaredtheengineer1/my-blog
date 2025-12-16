@@ -1,0 +1,32 @@
+{
+  "name": "my-blog",
+  "version": "1.0.0",
+  "description": "All blog posts and written content are licensed under [CC BY 4.0](https://creati8vecommons.org/licenses/by/4.0/)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "start:dev": "tsx src/index.ts",
+    "generate-index": "tsx src/generate-index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaredtheengineer1/my-blog.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jaredtheengineer1/my-blog/issues"
+  },
+  "homepage": "https://github.com/jaredtheengineer1/my-blog#readme",
+  "devDependencies": {
+    "@types/node": "^25.0.2",
+    "esbuild": "^0.27.1",
+    "eslint": "^9.39.2",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}
