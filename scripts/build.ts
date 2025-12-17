@@ -1,6 +1,6 @@
 import { copyFile, mkdir, readdir, readFile, writeFile } from 'fs/promises';
 import { join } from 'path';
-import { renderPost, renderPostToFile } from './render-post.js';
+import { renderPost, renderPostToFile } from './render-post';
 
 const POSTS_DIR = './src/posts';
 const TEMPLATES_DIR = './src/templates';

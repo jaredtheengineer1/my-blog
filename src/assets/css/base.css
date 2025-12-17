@@ -11,3 +11,7 @@ footer {
   position:absolute;
   height: 3vh;
 }
+
+.center {
+  text-align: center;
+}
