@@ -1,4 +1,4 @@
-import { readdir, copyFile, mkdir, writeFile, readFile } from 'fs/promises';
+import { copyFile, mkdir, readdir, readFile, writeFile } from 'fs/promises';
 import { join } from 'path';
 import { renderPost, renderPostToFile } from './render-post.js';
 

@@ -1,0 +1,13 @@
+@import url("tokens.css");
+
+header {
+  background-color: var(--color-primary);
+}
+
+footer {
+  background-color: var(--color-primary);
+  top: 97vh;
+  width: 100%;
+  position:absolute;
+  height: 3vh;
+}
