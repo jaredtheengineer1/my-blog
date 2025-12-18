@@ -60,3 +60,8 @@ main article h1,h2 {
 main article .time { 
   text-align: center;
 }
+
+#post {
+  max-height: 83vh;
+  overflow-y: scroll;
+}
