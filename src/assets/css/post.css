@@ -32,7 +32,7 @@
 }
 
 .post-item {
-  width: 100%;
+  width: 390px;
   height: 100%;
   text-align: center;
   background-color: #9e9e9e;
@@ -40,4 +40,23 @@
   text-overflow: ellipsis;
   overflow: hidden;
   /* white-space: nowrap; */
+}
+
+.post-item p {
+  width:390px;
+  height: 170px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+main article {
+  margin: 0 22%;
+}
+
+main article h1,h2 {
+  text-align: center
+}
+
+main article .time { 
+  text-align: center;
 }

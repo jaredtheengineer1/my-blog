@@ -1,12 +1,20 @@
 @import url("tokens.css");
 
 header {
-  background-color: var(--color-primary);
+  /* background-color: var(--color-primary); */
   height: 14vh;
   max-height: 14vh;
 }
 
-h1 {
+.inner-header {
+  background-color: var(--color-primary);
+  height: 14vh;
+  max-height: 14vh;
+  width: 75%;
+  margin: 0 auto;
+}
+
+.inner-header h1 {
   color: white;
   font-size: 40px
 }
@@ -20,11 +28,27 @@ h1 {
 footer {
   background-color: var(--color-primary);
   top: 97vh;
-  width: 100%;
+  width: 75%;
   position:absolute;
   height: 3vh;
+  margin: 0 auto 0 12.5%;
+  text-align: center;
+  font-weight: 500;
+  color: white;
 }
 
 .center {
   text-align: center;
+}
+
+.me {
+  background-color: var(--color-primary);
+}
+
+.absolute {
+  position:absolute;
+}
+
+.top {
+  top: 0;
 }
