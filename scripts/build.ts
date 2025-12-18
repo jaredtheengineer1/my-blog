@@ -49,23 +49,26 @@ async function buildBlog(): Promise<void> {
     // Render to HTML file
     await renderPostToFile(postPath, join(TEMPLATES_DIR, 'post.html'), OUTPUT_DIR);
   }
-
   // 5. Sort posts by date (newest first)
-  posts.sort((a, b) => b.date.localeCompare(a.date));
+  // posts.sort((a, b) => b.date.localeCompare(a.date));
+  posts.sort((a, b) => (b.date > a.date ? -1 : 1));
 
   // 6. Generate index page
   console.log('\n🏠 Generating index page...');
   const indexTemplate = await readFile(join(TEMPLATES_DIR, 'index.html'), 'utf-8');
-
   // Generate post list HTML
   const postListHtml = posts
     .map(
       (post) => `
-    <article class="post-preview">
-      <h2><a href="./posts/${post.slug}.html">${post.title}</a></h2>
-      <time datetime="${post.date}">${post.date}</time>
-      ${post.description ? `<p>${post.description}</p>` : ''}
-    </article>
+    <div class="post-preview">
+      <div class="container">
+        <div class="post-item">
+          <h2><a href="./posts/${post.slug}.html">${post.title}</a></h2>
+          <time datetime="${post.date}">${post.date}</time>
+          ${post.description ? `<p>${post.description}</p>` : ''}
+        </div>
+      </div>
+    </div>
   `
     )
     .join('\n');

@@ -1,4 +1,4 @@
 @import url('tokens.css');
 a, a:visited {
-  color: var(--color-secondary)
+  color: #752727;
 }

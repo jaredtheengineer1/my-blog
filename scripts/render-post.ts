@@ -29,6 +29,14 @@ export async function renderPost(markdownPath: string): Promise<Post> {
   const filename = basename(markdownPath);
   const slug = filename.replace(dateRegexTrailingDash, '').replace(/\.md$/, '');
   console.log('slug: ', slug);
+  // metadata.date = metadata.date.toString().slice(0, 10);
+  const isoDate = new Date(metadata.date).toISOString().slice(0, 10);
+  console.log(
+    'metadata: ',
+    isoDate,
+    `${isoDate.slice(5, 7)}/${isoDate.slice(8)}/${isoDate.slice(0, 4)}`
+  );
+  metadata.date = `${isoDate.slice(5, 7)}/${isoDate.slice(8)}/${isoDate.slice(0, 4)}`;
   return {
     ...metadata,
     content,
@@ -45,13 +53,13 @@ export async function renderPostToFile(
   const post = await renderPost(markdownPath);
   const template = await readFile(templatePath, 'utf-8');
 
+  console.log('what post: ', post);
   // Replace template placeholders
   const html = template
     .replaceAll('{{title}}', post.title)
     .replaceAll('{{date}}', post.date)
     .replaceAll('{{content}}', post.html);
 
-  console.log('??', html, post);
   // Write to output directory
   await mkdir(join(outputDir, 'posts'), { recursive: true });
   const outputPath = join(outputDir, 'posts', `${post.slug}.html`);
