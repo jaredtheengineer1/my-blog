@@ -1,0 +1,23 @@
+@import url("tokens.css");
+/*
+  BUTTON STYLES
+  Uses component tokens from design-tokens.css
+*/
+
+/* Base styles */
+.button {
+  font-size: var(--button-font-size-md);
+  font-weight: var(--button-font-weight);
+  letter-spacing: var(--button-letter-spacing);
+  line-height: var(--button-line-height);
+  border-radius: var(--button-border-radius);
+  border: 0;
+  cursor: pointer;
+  transition: background-color var(--transition-fast) ease-in-out;
+}
+
+.primary-button {
+  color: var(--button-primary-text);
+  background-color: var(--button-primary-bg);
+  border: 1px solid var(--button-primary-border);
+}

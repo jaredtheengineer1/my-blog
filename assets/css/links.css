@@ -1,0 +1,4 @@
+@import url('tokens.css');
+a, a:visited {
+  color: #752727;
+}
