@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/my-blog/assets/css/reset.css" />
+  <link rel="stylesheet" href="/my-blog/assets/css/tokens.css" />
+  <link rel="stylesheet" href="/my-blog/assets/css/base.css" />
+  <link rel="stylesheet" href="/my-blog/assets/css/post.css" />
+  <link rel="stylesheet" href="/my-blog/assets/css/links.css" />
+  <title>My First Week of Rust - Jared Clayborn</title>
+</head>
+<body>
+  <header>
+    <div class="inner-header">
+      <h1 class="center">Jared Clayborn</h1>
+       <div>
+        <p class="center subheader">Engineering Blog - Systems Programming, Rust, and the Journey to Staff Engineer</p>
+      </div>
+    </div>
+    <nav class="absolute top">
+      <a href="/my-blog/index.html">← Back to Home</a>
+    </nav>
+     <div class="me" style="position:absolute; top:0; right:0%;">
+      <a href="/my-blog/index.html"><img style="border-radius: 50%;" height="132px" src="/my-blog/assets/images/Jared.png"></a>
+    </div>
+  </header>
+
+  <main id="post">
+    <article>
+      <h1>My First Week of Rust</h1>
+      <div class="time" datetime="12/21/2025">12/21/2025</div>
+
+      <div class="post-content">
+        <h2>Variables</h2>
+<p>Variables are pretty common, right? If you&#39;ve been programming
+for literally any amount of time, you used a variable.  The only 
+examle that I can think of where that isn&#39;t true, is if you 
+stopped at &quot;Hello, World!&quot; Even that one uses variables in some
+tutorials.</p>
+<p>Where it differs: I&#39;ve been using JavaScript and TypeScript for 
+the last few years. Yes, TypeScript has types, but it doesn&#39;t
+<em>require</em> that you use them, and while JavaScript has types, if
+you aren&#39;t using something lik JSDoc, it doesn&#39;t care. </p>
+<p>Rust is a statically typed language, though. while you can create
+a variable without assigning it to a type, if you try to change 
+it&#39;s type later...you fail. Think of it like <code>var</code> in C#. Unless 
+you use a <code>const</code>, those are required to have a type declared. </p>
+<p>Unlike the environment I&#39;ve been using the last few years, rust 
+is immutable by default.  In JavaScript/TypeScript, i have to 
+declare a <code>const</code>. While Rust does have a <code>const</code> variable type, 
+your variable doesn&#39;t have to specifically be called a <code>const</code> to 
+make it immutable. It&#39;s just the opposite actually.  That&#39;s sort 
+of neat. You have to intentionally set it to a mutable state using 
+<code>mut</code>. That makes it a very consious choice, and makes you consider 
+programming choices differently. </p>
+<p>Another fun thing that I&#39;ve found is the idea of shadowing. Again -
+JavaScript/TypeScript has been my primary for the last few years. We 
+don&#39;t get overloading, and that&#39;s what this feels like to me - just 
+at the variable level instaed of the function level. You can, in different 
+scopes, change not just the value, but the type of the variable to suit a 
+need. </p>
+<p>&quot;Well, why would you want to change the type, anyway? What was the point of 
+creating it as a string just to use it as a number later?&quot;  Great question, 
+glad you asked.  In the 2nd chapter of <a href="'https://doc.rust-lang.org/stable/book/ch02-00-guessing-game-tutorial.html">The Rust Book</a>, 
+we built a guessing game. This is a simple example, but it does demonstrate 
+a how and why you would want to shadow.  The user inputs a number and it&#39;s 
+captured as a string.  But the secret number that was generated was a number. 
+We need to be able to compare the 2 easily and safely.  It doesn&#39;t seem like &#39;
+there is a way to compare numbers to strings the way you would in JavaScript (<code>==</code>), 
+at least in my limited time and scope in learning Rust. So we convert it to a 
+number, first, then compare the 2. That&#39;s accomplished by shadowing.</p>
+<p>Maybe there&#39;s a way to specifiy what the expected data 
+type is, and I just don&#39;t know it. I&#39;ll have to look into that. I&#39;ll also have to 
+look into different levels of equality, like what&#39;s available in JS and TS.  Gotta&#39; 
+get some more knowledge. </p>
+<p>Well, anyway, Rust has the basics:</p>
+<ul>
+<li><code>integers</code></li>
+<li><code>floats</code></li>
+<li><code>booleans</code></li>
+<li><code>chars</code></li>
+</ul>
+<p>But integers can easily be broken into smaller groups.</p>
+<table>
+<thead>
+<tr>
+<th>Length</th>
+<th>Signed</th>
+<th>Unsigned</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>8-bit</td>
+<td>i8</td>
+<td>u8</td>
+</tr>
+<tr>
+<td>16-bit</td>
+<td>i16</td>
+<td>u16</td>
+</tr>
+<tr>
+<td>32-bit</td>
+<td>i32</td>
+<td>u32</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+</tbody></table>
+<p>and the same for 64, and 128 bit integers, and floats (<code>f8</code>,<code>f16</code>, etc).</p>
+<p>At least Rust uses the <code>let</code> keyword for variables. That feels very familiar.</p>
+<p>You also have somre more advanced types like</p>
+<ul>
+<li><code>Arrays</code></li>
+<li><code>Tuples</code></li>
+<li><code>Enums</code></li>
+<li><code>Strcts</code></li>
+</ul>
+<p><code>Tuples</code> are your basic, multi type variable: </p>
+<pre><code>let my_tuple: (str, bool, u32, f32) = (&#39;this is a tuple&#39;, true, 800, 2.2)
+</code></pre>
+<p><code>Structs</code> are &quot;heterogeneous producs of other types&quot;. What? It&#39;s an object with multiple props that are each the same type. Think of a Rectangle, or something.</p>
+<pre><code>struct Rectangle {
+  top_left_x: i32,
+  top_left_y: i32,
+  bottom_right_x: i32
+  bottom_right_y: i32
+}
+</code></pre>
+<p>One last thing to note about variables. The JavaScript/TypeScript convention is to use 
+<code>camelCase</code> for variable names, and the Rust convention seems to be <code>snake_case</code>.  Semantics, 
+I know. Both languages will take the variable in whatever fashion you give it, but it&#39;s been 
+an exercise, &quot;having&quot; to go back and try and correct my variable names.</p>
+<h2>Functions</h2>
+<p><code>return</code>? A thing of the past. All you need to do in Rust is have the last line of a function, and to declare a return type of the function. That last part feels familiar to my TypeScript. While not required, it is good form.</p>
+<pre><code>fn add_two_numbers(a: u32, b: u32) -&gt; u32 {
+  a + b
+}
+
+fn main() {
+  let a: u32 = 5;
+  let b: u32 = 10;
+  println!(&quot;The return value of {} + {} = {}!&quot;, a, b, add_two_numbers(a,b)); 
+  //returns 15
+  /*the values &quot;{}&quot; are used for string interpolation. you can put a value directly inside &quot;{a}&quot;, or you can do as I did and add a comma separated list in the order you want them displayed after the print string
+}
+</code></pre>
+<p>Easy, right?</p>
+<h2>Ownership</h2>
+<p>The Rust book claims that this is new concept to many programmers. I will count myself as one of those to whom this is new.  It&#39;s Rust&#39;s way of managing memory while running. The Rust book goes on to say &quot;When you understand ownership, you&#39;ll have a solid foundation for understanding the features that make Rust unique.&quot;</p>
+<p>It (Rust) doesn&#39;t do garbage collection, and you don&#39;t manually free up resources. Instead, you set up a set of rules that the compiler will follow. This applies to both the stack, and the heap.</p>
+<p>The rules that I need to keep in mind:</p>
+<ul>
+<li>Each value in Rust has an <em>owner</em></li>
+<li>There can only be one owner at a time</li>
+<li>When the owner goes out of scope, the value will be dropped</li>
+</ul>
+<p>The simplist example is just variable scope.
+If you declare a variable in a function, it&#39;s scope is only viable within that function after it&#39;s declaration.  We see that in the shadowing example from Chapter 3 of The Rust Book - you can see <a href="https://github.com/jaredtheengineer1/learn-rust/blob/master/chapter-3/src/main.rs">my example here</a>. In this example, starting on ~line 22 (at least as of the time of writing this entry) is the <code>shadowed</code> function. There are a couple of times that the <code>x</code> variable was shadowed and you can see when it goes out of scope.</p>
+<p>At the end of the scope, Rust automagically calls the <code>drop</code> function to return the memory. The book explains that this is similar to Resource Acquisition Is Initialization (RAII) in C++.  I took some C++ in school, many moons ago, but I don&#39;t recall this.</p>
+<p>This will effect how the code is written, though. Programming in a functional programming paradigm seems to me to be the best option for this.  Pass what you need, create only what is OK to have removed, and pass back values to use elsewhere.</p>
+<p>A fun side note: 
+For simple variables like an int</p>
+<pre><code>let x = 5;
+let y = x;
+</code></pre>
+<p>The value 5 is indeed copied into <code>y</code>.</p>
+<p>For the more complex string</p>
+<pre><code>let x = String::from(&quot;my string&quot;);
+let y = x;
+</code></pre>
+<p>The pointer to the heap is copied, not the value itself. I imagine then, and I&#39;ll need to check in my learn-rust repo, that if I were to modify <code>x</code>, it would modify the value of <code>y</code> since it&#39;s just a reference to the same point in memory.</p>
+<p><strong>Follow Up</strong>
+Rust takes care of that because it might screw with your memory if you try to <code>drop</code> both <code>x</code> and <code>y</code>. <code>x</code> is now considered invalid and doesn&#39;t hold the reference anymore. Rust thinking ahead!</p>
+<p><strong>Follow Up 2</strong>
+Because of how it invalidates on assignment, </p>
+<pre><code>fn main() {
+  let s = String::from(&#39;something&#39;);
+
+  some_function(s);
+  ...
+}
+</code></pre>
+<p><code>s</code> is now invalid after passing it to <code>some_function</code>. If you need to continue to use the value of <code>s</code>, you should consider returning it from <code>some_function</code>.  If you don&#39;t need it after <code>some_function</code> consider if you need it in <code>main</code>. It depends on what <code>some_function</code> actually does. </p>
+<p>Really need to consider how my programs are built and designed. Rust will be a good lesson in architecture.</p>
+<p><strong>Yay, more notes</strong>
+Unless you pass by reference.</p>
+<pre><code>fn main() {
+  let s = String::from(&quot;some string&quot;);
+
+  let len = get_length_of_string(&amp;s);
+
+  println!(&quot;s is still a valid variable: {s}&quot;);
+}
+</code></pre>
+<p>This passes the reference instead of the pointer, allowing you to keep <code>s</code> as a valid reference to use elsewhere in your program.</p>
+<p>Sorry for the waffling on some of the above information. That&#39;s what happens when you re-read. You learn a little more, and remember a little better.</p>
+<p>See you next week!</p>
+
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <p>© 2025 Jared Clayborn. Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+  </footer>
+</body>
+</html>
