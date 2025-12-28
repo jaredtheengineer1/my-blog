@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/my-blog/assets/css/reset.css" />
+  <link rel="stylesheet" href="/my-blog/assets/css/tokens.css" />
+  <link rel="stylesheet" href="/my-blog/assets/css/base.css" />
+  <link rel="stylesheet" href="/my-blog/assets/css/post.css" />
+  <link rel="stylesheet" href="/my-blog/assets/css/links.css" />
+  <title>Structs and Enums and Pattern Matching, oh my! - Jared Clayborn</title>
+</head>
+<body>
+  <header>
+    <div class="inner-header">
+      <h1 class="center">Jared Clayborn</h1>
+       <div>
+        <p class="center subheader">Engineering Blog - Systems Programming, Rust, and the Journey to Staff Engineer</p>
+      </div>
+    </div>
+    <nav class="absolute top">
+      <a href="/my-blog/index.html">← Back to Home</a>
+    </nav>
+     <div class="me" style="position:absolute; top:0; right:0%;">
+      <a href="/my-blog/index.html"><img style="border-radius: 50%;" height="132px" src="/my-blog/assets/images/Jared.png"></a>
+    </div>
+  </header>
+
+  <main id="post">
+    <article>
+      <h1>Structs and Enums and Pattern Matching, oh my!</h1>
+      <div class="time" datetime="12/28/2025">12/28/2025</div>
+
+      <div class="post-content">
+        <h2>Structs</h2>
+<p>I misunderstood structs in my last post. Looking at only a couple of examples before actually reading the chapter on structs, but that&#39;s being rectified this week.
+Mistaken information: </p>
+<pre><code>`Structs` are &quot;heterogeneous producs of other types&quot;. What? It&#39;s an object with multiple props that are each the same type. Think of a Rectangle, or something.
+</code></pre>
+<p>A struct can comprise multiple data types. This is more like the object that you&#39;re probably familar with already, and makes a lot more sense to me than an object compsed of only one type. </p>
+<p>Example:</p>
+<pre><code>struct Person {
+  name: String,
+  age: u8, // 0 - 255
+  ...
+}
+</code></pre>
+<p>Structs don&#39;t appear to be a data type that you can extend through shadowing.  In the case of a struct, if you need more data then you should create a new struct.</p>
+<pre><code>struct A {
+  some_data: String,
+  some_more_date: u8
+}
+
+struct B {
+  additional_data: String,
+  original_data: A
+}
+</code></pre>
+<p>Structs also have a short hand for field initiation. This, again, feels very familiar to me as a JavaScript/TypeScript dev.</p>
+<pre><code>let some_data = &quot;thing&quot;;
+
+let x = My_strut {
+  some_data,
+  some_more_data: 8
+}
+</code></pre>
+<p>This is an efficient way to write</p>
+<pre><code>let some_data = &quot;thing&quot;;
+
+let x = My_struct {
+  some_data: some_data,
+  some_more_data: 8
+}
+</code></pre>
+<p>But wait! There&#39;s more!
+You don&#39;t have to name your properties?
+You can write a struct that is a tuple?</p>
+<pre><code>struct Color(i32, i32, i32);
+</code></pre>
+<p>While I guess this can make sense in some instances (like the example above where people reading your code will likely associate those with RGB), in general I think this will be a <em>bad idea</em>. Part of what&#39;s nice, in my opinion, about structs is that they sort of give your code a nice, self-documenting quality.</p>
+<p>The book also gives the following example:</p>
+<pre><code>struct Point(i32, i32, i32);
+</code></pre>
+<p>I don&#39;t typically jump straight to <code>(X, Y, Z)</code> coordinates when I think of a point. Maybe that&#39;s a failing on my part, but I don&#39;t think that&#39;s as clear as it could be.</p>
+<p>I prefer </p>
+<pre><code>struct Color {
+  R: i32,
+  G: i32,
+  B: i32
+}
+</code></pre>
+<p>I&#39;ve got a ways to go in The Rust book yet before I learn about <code>traits</code>, but apparently there is a <code>unit-like</code> struct that can be used when you want to implement a <code>trait</code>, but don&#39;t yet hae data to store on the type.</p>
+<pre><code>struct AlwaysEqual;
+
+fn main() {
+  let subject = AlwaysEqual;
+}
+</code></pre>
+<p>Is this going to keep track of some global state? I&#39;m not sure why I&#39;d want to declare this variable here without data, except to be added later.</p>
+<h2>Enums</h2>
+<p>As expected, these are a custom type.  In TypeScript, I would define</p>
+<pre><code>enum IpAddrKind {
+  V4 = &#39;V4&#39;,
+  V6 = &#39;V6&#39;
+}
+
+//accessed as 
+let current_ip_type = IpAddrKind.V4;
+</code></pre>
+<p>or optionally not initialize them to a string for 0 based indexing. In Rust, it&#39;s very similar:</p>
+<pre><code>#[derive(Debug)]
+enum IpAddrKind {
+    V4,
+    V6,
+}
+fn main() {
+    let four = IpAddrKind::V4;
+    let six = IpAddrKind::V6;
+    println!(&quot;{:?} {:?}&quot;,four, six)
+}
+</code></pre>
+<p>The above code creates the enum with the debug trait (I think it&#39;s a trait?) so that i can print it out. </p>
+<p>Note that the rust <code>enum</code> doesn&#39;t take an assignment. I tried in an online editor at <code>tutorialspoint</code> and it failed with </p>
+<pre><code>#[derive(Debug)]
+enum Test {
+    Some = String::from(&quot;thing&quot;),
+    Is = String::from(&quot;wrong&quot;)
+}
+fn main() {
+    let x = Test::some;
+    let y = Test::is;
+    println!(&quot;Hello, World! {:?} {:?}&quot;, x, y);
+}
+
+.....
+Compilation Error:
+error[E0308]: mismatched types
+ --&gt; main.rs:3:16
+  |
+3 |         Some = String::from(&quot;thing&quot;),
+  |                ^^^^^^^^^^^^^^^^^^^^^ expected isize, found struct `std::string::String`
+  |
+  = note: expected type `isize`
+             found type `std::string::String`
+
+error[E0308]: mismatched types
+ --&gt; main.rs:4:14
+  |
+4 |         Is = String::from(&quot;wrong&quot;)
+  |              ^^^^^^^^^^^^^^^^^^^^^ expected isize, found struct `std::string::String`
+  |
+  = note: expected type `isize`
+             found type `std::string::String`
+
+error: aborting due to 2 previous errors
+
+For more information about this error, try `rustc --explain E0308`.
+</code></pre>
+<p>I tried with a couple of different variable types, and assigning directly as a string instead of <code>String::from(...)</code>. No dice.</p>
+<h2>Matching</h2>
+<p>I like Rust&#39;s <code>match</code> keyword.  I have a bit of hands on experience from Chapter 2 of The Rust Book, where we built a <a href="https://github.com/jaredtheengineer1/learn-rust/blob/master/chapter-2/guessing_game/src/main.rs">&quot;Guess the Number&quot; game</a>.</p>
+<p>In the simple game, you compared 2 integers with built in <code>Ordering</code> arguments from the standard library.  In this chapter, however, it takes a look at comparing <code>enums</code>.  This is a realy good look, I think.  </p>
+<p>The book example:</p>
+<pre><code>enum Coin {
+  Penny,
+  Nickel,
+  Dime,
+  Quarter
+}
+
+fn value_in_cents(coin: Coin) -&gt; u8 {
+  match coin {
+    Coin::Penny =&gt; 1,
+    Coin::Nickel =&gt; 5,
+    Coin::Dime =&gt; 10,
+    Coin::Quarter =&gt; 25
+  }
+}
+</code></pre>
+<p>Let&#39;s break it down.</p>
+<p>First is the <code>enum</code> for <code>Coin</code>. This defines common US coins by name. Next, in our <code>value_in_cents</code> function, we take a single param: <code>coin:Coin</code>. This function accepts a single value that must be withint the <code>Coin</code> enum to be valid.  Finally, the match statement. It mateches the coin (<code>match coin</code>) and maps it to a value in the enum.  When it finds the correct match, it returns a defined value.  </p>
+<p>You would probably run this in a loop to count change or, conversly, change the function to accept an array of values and keep track of the running total to return at the end. </p>
+<p>You can find my very simple version of this in my <a href="https://github.com/jaredtheengineer1/learn-rust/blob/master/chapter-5/enum/main.rs">learn-rust repo</a>.</p>
+<p>I sort of cheated and looked up a couple of traits to make it easier to do.  It&#39;s easy to break, it doesn&#39;t convert change over .99 cents to dollars - it&#39;s basic. I chose to use <code>i8</code> because you can&#39;t return a negative total. The least you can have is 0. </p>
+<p>Fun note:
+As of the time of this writing the return from the <code>value_in_cents</code> function is on line 20. If you put a semi-color after <code>total</code>...it breaks. <code>total;</code> is a statment returning <code>()</code>, while <code>total</code> is the value of the variable <code>total</code>.  Do not put a semi-colon after the final return value unless you plan on writing <code>return total;</code>.  </p>
+
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <p>© 2025 Jared Clayborn. Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+  </footer>
+</body>
+</html>
