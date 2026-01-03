@@ -18,16 +18,18 @@
         <p class="center subheader">Engineering Blog - Systems Programming, Rust, and the Journey to Staff Engineer</p>
       </div>
     </div>
-    <nav class="absolute top">
-      <a href="/my-blog/index.html">← Back to Home</a>
-    </nav>
   </header>
 
-  <main id="post">
-    <article>
+
+  <main>
+    <nav class="back-nav" aria-label="back to home">
+      <a href="/my-blog/index.html">← Back to Home</a>
+    </nav>
+    <section class="intro">
       <h1>Structs and Enums and Pattern Matching, oh my!</h1>
       <div class="time" datetime="12/28/2025">12/28/2025</div>
-
+    </section>
+    <section class="blog-preview-section">
       <div class="post-content">
         <h2>Structs</h2>
 <p>I misunderstood structs in my last post. Looking at only a couple of examples before actually reading the chapter on structs, but that&#39;s being rectified this week.
@@ -184,7 +186,7 @@ fn value_in_cents(coin: Coin) -&gt; u8 {
 If you go and look at my simple version, and you put a semi-color after <code>total</code>...it breaks. <code>total;</code> is a statment returning <code>()</code>, while <code>total</code> is the value of the variable <code>total</code>.  Do <em>not</em> put a semi-colon after the final return value unless you plan on writing <code>return total;</code>.</p>
 
       </div>
-    </article>
+    </section>
   </main>
 </body>
 </html>

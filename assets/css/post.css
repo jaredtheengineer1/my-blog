@@ -21,11 +21,11 @@ main p:not(.page-intro) {
   color: var(--color-text-seondary);
 }
 
-.case-study-section {
+.blog-preview-section {
   padding-bottom: var(--space-2);
 }
 
-.case-study-section + .case-study-section {
+.blog-preview-section + .blog-preview-section {
   margin-top: var(--space-2);
 }
 
