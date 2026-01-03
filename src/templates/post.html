@@ -18,20 +18,22 @@
         <p class="center subheader">Engineering Blog - Systems Programming, Rust, and the Journey to Staff Engineer</p>
       </div>
     </div>
-    <nav class="absolute top">
-      <a href="/my-blog/index.html">← Back to Home</a>
-    </nav>
   </header>
 
-  <main id="post">
-    <article>
+
+  <main>
+    <nav class="back-nav" aria-label="back to home">
+      <a href="/my-blog/index.html">← Back to Home</a>
+    </nav>
+    <section class="intro">
       <h1>{{title}}</h1>
       <div class="time" datetime="{{date}}">{{date}}</div>
-
+    </section>
+    <section class="blog-preview-section">
       <div class="post-content">
         {{content}}
       </div>
-    </article>
+    </section>
   </main>
 </body>
 </html>
