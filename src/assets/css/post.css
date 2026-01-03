@@ -1,20 +1,36 @@
 @import url('tokens.css');
 
 .posts {
-  max-height: 83vh;
-  overflow-y: scroll;
-  display: grid;
-  grid-template-columns: auto auto auto;
-  margin: 0 11.5%;
-  padding-right: 17.25%;
+  /* max-height: 86vh;
+  overflow-y: scroll; */
+  /* display: grid;
+  grid-template-columns: auto auto auto; */
+  /* margin: 0 11.5%;
+  padding-right: 17.25%; */
   width: 100%;
 }
-.post-preview {
-  /* width: 100%;
-  color: var(--color-tertiary); */
-  width: 400px;
-  /* color: black; */
 
+main {
+  margin: 0 auto;
+  max-width: 72ch;
+  padding-inline: var(--space-4);
+  padding-bottom: var(--space-6);
+}
+
+main p:not(.page-intro) {
+  color: var(--color-text-seondary);
+}
+
+.case-study-section {
+  padding-bottom: var(--space-2);
+}
+
+.case-study-section + .case-study-section {
+  margin-top: var(--space-2);
+}
+
+section:last-of-type {
+  margin-bottom: var(--space-6);
 }
 
 .container {
@@ -41,7 +57,6 @@
   margin: 0px 8px 8px 8px;
   text-overflow: ellipsis;
   overflow: hidden;
-  /* white-space: nowrap; */
 }
 
 .post-item p {

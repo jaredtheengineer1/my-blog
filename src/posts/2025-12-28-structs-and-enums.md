@@ -191,9 +191,14 @@ First is the `enum` for `Coin`. This defines common US coins by name. Next, in o
 
 You would probably run this in a loop to count change or, conversly, change the function to accept an array of values and keep track of the running total to return at the end. 
 
+
 You can find my very simple version of this in my [learn-rust repo](https://github.com/jaredtheengineer1/learn-rust/blob/master/chapter-5/enum/main.rs).
 
-I sort of cheated and looked up a couple of traits to make it easier to do.  It's easy to break, it doesn't convert change over .99 cents to dollars - it's basic. I chose to use `i8` because you can't return a negative total. The least you can have is 0. 
+
+I sort of cheated and looked up a couple of traits to make it easier to do. I also skipped ahead a bit to look up for loops.
+
+It's easy to break, it doesn't convert change over .99 cents to dollars - it's basic. I chose to use `i8` because you can't return a negative total. The least you can have is 0. 
+
 
 Fun note:
-As of the time of this writing the return from the `value_in_cents` function is on line 20. If you put a semi-color after `total`...it breaks. `total;` is a statment returning `()`, while `total` is the value of the variable `total`.  Do not put a semi-colon after the final return value unless you plan on writing `return total;`.  
+If you go and look at my simple version, and you put a semi-color after `total`...it breaks. `total;` is a statment returning `()`, while `total` is the value of the variable `total`.  Do *not* put a semi-colon after the final return value unless you plan on writing `return total;`.

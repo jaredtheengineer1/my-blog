@@ -57,21 +57,22 @@ async function buildBlog(): Promise<void> {
   console.log('\n🏠 Generating index page...');
   const indexTemplate = await readFile(join(TEMPLATES_DIR, 'index.html'), 'utf-8');
   // Generate post list HTML
-  const postListHtml = posts
-    .map(
-      (post) => `
-    <div class="post-preview">
-      <div class="container">
-        <div class="post-item">
+  //main
+  //case-study-section = blog-preview-section
+  //case-study-preview = blog-preview
+  const postListHtml = posts.map(
+    (post) => `
+    <main> 
+      <section class="blog-preview-section">
+        <div class="blog-preview">
           <h2><a href="./posts/${post.slug}.html">${post.title}</a></h2>
-          <time datetime="${post.date}">${post.date}</time>
-          ${post.description ? `<p>${post.description}</p>` : ''}
+          <time datetime=${post.date}">${post.date}</time>
+          <p>${post.description}</p>
         </div>
-      </div>
-    </div>
-  `
-    )
-    .join('\n');
+      </section>
+    </main>
+    `
+  );
 
   const indexHtml = indexTemplate.replace('{{posts}}', postListHtml);
   await writeFile(join(OUTPUT_DIR, 'index.html'), indexHtml);
