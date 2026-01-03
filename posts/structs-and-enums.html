@@ -178,16 +178,13 @@ fn value_in_cents(coin: Coin) -&gt; u8 {
 <p>First is the <code>enum</code> for <code>Coin</code>. This defines common US coins by name. Next, in our <code>value_in_cents</code> function, we take a single param: <code>coin:Coin</code>. This function accepts a single value that must be withint the <code>Coin</code> enum to be valid.  Finally, the match statement. It mateches the coin (<code>match coin</code>) and maps it to a value in the enum.  When it finds the correct match, it returns a defined value.  </p>
 <p>You would probably run this in a loop to count change or, conversly, change the function to accept an array of values and keep track of the running total to return at the end. </p>
 <p>You can find my very simple version of this in my <a href="https://github.com/jaredtheengineer1/learn-rust/blob/master/chapter-5/enum/main.rs">learn-rust repo</a>.</p>
-<p>I sort of cheated and looked up a couple of traits to make it easier to do.  It&#39;s easy to break, it doesn&#39;t convert change over .99 cents to dollars - it&#39;s basic. I chose to use <code>i8</code> because you can&#39;t return a negative total. The least you can have is 0. </p>
+<p>I sort of cheated and looked up a couple of traits to make it easier to do. I also skipped ahead a bit to look up for loops.</p>
+<p>It&#39;s easy to break, it doesn&#39;t convert change over .99 cents to dollars - it&#39;s basic. I chose to use <code>i8</code> because you can&#39;t return a negative total. The least you can have is 0. </p>
 <p>Fun note:
-As of the time of this writing the return from the <code>value_in_cents</code> function is on line 20. If you put a semi-color after <code>total</code>...it breaks. <code>total;</code> is a statment returning <code>()</code>, while <code>total</code> is the value of the variable <code>total</code>.  Do not put a semi-colon after the final return value unless you plan on writing <code>return total;</code>.  </p>
+If you go and look at my simple version, and you put a semi-color after <code>total</code>...it breaks. <code>total;</code> is a statment returning <code>()</code>, while <code>total</code> is the value of the variable <code>total</code>.  Do <em>not</em> put a semi-colon after the final return value unless you plan on writing <code>return total;</code>.</p>
 
       </div>
     </article>
   </main>
-
-  <footer>
-    <p>© 2025 Jared Clayborn. Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
-  </footer>
 </body>
 </html>

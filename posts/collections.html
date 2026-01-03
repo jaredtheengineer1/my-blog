@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/my-blog/assets/css/reset.css" />
+  <link rel="stylesheet" href="/my-blog/assets/css/tokens.css" />
+  <link rel="stylesheet" href="/my-blog/assets/css/base.css" />
+  <link rel="stylesheet" href="/my-blog/assets/css/post.css" />
+  <link rel="stylesheet" href="/my-blog/assets/css/links.css" />
+  <title>Collections - Jared Clayborn</title>
+</head>
+<body>
+  <header>
+    <div class="inner-header">
+      <h1 class="center">Jared Clayborn</h1>
+       <div>
+        <p class="center subheader">Engineering Blog - Systems Programming, Rust, and the Journey to Staff Engineer</p>
+      </div>
+    </div>
+    <nav class="absolute top">
+      <a href="/my-blog/index.html">← Back to Home</a>
+    </nav>
+  </header>
+
+  <main id="post">
+    <article>
+      <h1>Collections</h1>
+      <div class="time" datetime="01/02/2026">01/02/2026</div>
+
+      <div class="post-content">
+        <h2>Collections</h2>
+<p>Collections are homogeneous groups of variables. Boaring. Let&#39;s get into some fun.</p>
+<h2>Arrays vs Vectors</h2>
+<p>On the surface I thought these were pretty similar. I wasn&#39;t sure why I&#39;d want to pick a vector over an array. I get it now.</p>
+<p>To start, there are a couple of ways that we can declare our vector.  Remember, Rust has the macro (singnaled by the <code>!</code> at the end of the keyword, like println!...), as well as built in calls like &quot;New&quot;.</p>
+<p>More often than not, I imagine, we&#39;ll be using the macro to declare values right at the start. You can probably do this with the new call, but I don&#39;t know and haven&#39;t tried it out at the time of this writing. I&#39;ll play around with it in my Learning Rust repo when I&#39;m done writing this post.</p>
+<p>So I wrote &quot;I get it now&quot; in regards to vectors vs arrays.  Lets get into that.</p>
+<h3>Arrays</h3>
+<p>Arrays are...well...arrays. The thing about them, and this is different from my JavaScript background, is that they are statically sized and don&#39;t change.</p>
+<p>Wanna break your stuff? Declare an array of size 5, and try pushing 6 things to it. Not gonna work the way you want. It compiles, it allocates memory for 5 elements, it doesn&#39;t work anymore.</p>
+<h3>Vectors</h3>
+<p>Vectors, on the other hand, are dynamically sized/allocated.  That means that I can declare it, and then push and pop from it as needed. No having to declare it&#39;s size upfront. Very handy.</p>
+<p>&quot;Wait, did you say &#39;pop&#39;?&quot; Yup. Much like a stack, whatever you pushed to the vector last can be <code>pop()</code>&#39;d off and accessed. But wait, it also is indexed - so my JavaScript remembering self can always access the 2nd index like <code>my_vector[2]</code>. And, it&#39;s 0 based indexing - which is correct - so that&#39;s the 3rd element on the vector.</p>
+<h3>Array or vector?</h3>
+<p>This just depends on your needs. If you know that you&#39;re only ever going to need a certain number of things, go with an array.  </p>
+<p>Because I&#39;m a huge nerd, I liken this to an game&#39;s inventory system. If your character can only ever hold <code>X</code> items, then you don&#39;t really need a vector - an array will work because you declare it&#39;s size right off the bat.  </p>
+<p>If, on the other hand, you could have an unknowable number of things, vector is going to be the right choice for you. My house has a finite amount of space, but my wife is pretty sure she can change that with amazon purchases. This is when you use the vector.</p>
+<h3>Things to remember about vectors</h3>
+<p>Yes, a vector is mutable...if you remember to declare it as such. While a vector can be pushed to, Rust is immutable by default.
+Because it&#39;s mutable, because it stores it&#39;s values in contiguous memory, you need to be careful how you access it</p>
+<pre><code>  let mut v = vec![1, 2, 3, 4, 5];
+  let first = &amp;v[0];
+  v.push(6);
+  println!(&quot;The first element is: {first}&quot;);
+</code></pre>
+<p>will throw an error. Why? Because you have referenced (<code>&amp;</code>) the first index, but by pushing to your vector you might have moved the memory location on the heap.</p>
+<h2>Tradeoffs</h2>
+<p>Because the <code>array</code> is statically sized at compile, and the <code>vector</code> is dynamic, the array can be stored on the stack while the vector is stored in the heap.</p>
+<p>This leads me to believe that the <code>array</code> is probably faster and should be preferred when feasible.  That being said, they both store their data in contigous memory so the <code>vector</code> <em>shouldn&#39;t</em> be too slow.</p>
+<p>I should note that I have done exactly 0 testing on this, and it&#39;s all theory. I&#39;m sure someone out there has run the numbers, and I could look it up, but this sounds close enough for now. As my learning progresses, and I start trying to code actual projects I&#39;ll make sure to write some code specifically for benchmarking and I&#39;ll talk about the tradeoffs more then</p>
+
+      </div>
+    </article>
+  </main>
+</body>
+</html>
