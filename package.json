@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/jaredtheengineer1/my-blog#readme",
   "dependencies": {
-    "jaredsdesignsystem": "git+ssh://git@github.com/jaredtheengineer1/jaredsDesignSystem.git#v1.0.5"
+    "jaredsdesignsystem": "https://github.com/jaredtheengineer1/jaredsDesignSystem.git#v1.0.5"
   },
   "devDependencies": {
     "@types/node": "^25.0.2",
