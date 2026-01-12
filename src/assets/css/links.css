@@ -1,4 +1,8 @@
-@import url('tokens.css');
+/* @import url('tokens.css');
 a, a:visited {
   color: var(--color-primary);
+} */
+
+.something {
+  color: red;
 }

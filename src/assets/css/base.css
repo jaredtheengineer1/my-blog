@@ -1,12 +1,15 @@
-@import url("tokens.css");
+/* @import url("tokens.css"); */
+/* @import "jaredsdesignsystem/dist/index.css"; */
+/* @import "../../../node_modules/jaredsdesignsystem/dist/index.css" */
+@import "jaredsdesignsystem/dist/index.css";
 
-header {
+/* header {
   /* background-color: var(--color-primary); */
-  height: 14vh;
+  /* height: 14vh;
   max-height: 14vh;
-}
+} */
 
-.inner-header {
+/* .inner-header {
   background-color: var(--color-primary);
   height: 14vh;
   max-height: 14vh;
@@ -23,7 +26,7 @@ header {
   font-size: 20px;
   color: white;
   font-weight:600;
-}
+}  */
 
 .center {
   text-align: center;
