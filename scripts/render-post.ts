@@ -53,7 +53,7 @@ export async function renderPostToFile(
   const post = await renderPost(markdownPath);
   const template = await readFile(templatePath, 'utf-8');
 
-  console.log('what post: ', post);
+  // console.log('what post: ', post);
   // Replace template placeholders
   const html = template
     .replaceAll('{{title}}', post.title)
@@ -65,5 +65,5 @@ export async function renderPostToFile(
   const outputPath = join(outputDir, 'posts', `${post.slug}.html`);
   await writeFile(outputPath, html);
 
-  console.log(`✅ Rendered: ${post.slug}.html`);
+  // console.log(`✅ Rendered: ${post.slug}.html`);
 }

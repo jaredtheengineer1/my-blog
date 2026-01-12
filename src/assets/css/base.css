@@ -1,32 +1,5 @@
-/* @import url("tokens.css"); */
-/* @import "jaredsdesignsystem/dist/index.css"; */
-/* @import "../../../node_modules/jaredsdesignsystem/dist/index.css" */
-@import "jaredsdesignsystem/dist/index.css";
-
-/* header {
-  /* background-color: var(--color-primary); */
-  /* height: 14vh;
-  max-height: 14vh;
-} */
-
-/* .inner-header {
-  background-color: var(--color-primary);
-  height: 14vh;
-  max-height: 14vh;
-  width: 75%;
-  margin: 0 auto;
-}
-
-.inner-header h1 {
-  color: white;
-  font-size: 40px
-}
-
-.subheader {
-  font-size: 20px;
-  color: white;
-  font-weight:600;
-}  */
+@import '@jared.the.engineer1/design-system/dist/index.css';
+/* @import "../node_modules/@jared.the.engineer1/design-system/dist/index.css"; */
 
 .center {
   text-align: center;

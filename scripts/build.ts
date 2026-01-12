@@ -2,6 +2,7 @@ import { copyFile, mkdir, readdir, readFile, writeFile } from 'fs/promises';
 import { join, resolve } from 'path';
 import { renderPost, renderPostToFile } from './render-post';
 import { build } from 'esbuild';
+import { existsSync } from 'fs';
 
 const ROOT_DIR = process.cwd();
 const POSTS_DIR = resolve(ROOT_DIR, 'src/posts');
@@ -42,7 +43,25 @@ async function buildBlog(): Promise<void> {
     bundle: true,
     loader: { '.css': 'css' },
     logLevel: 'info',
+    // external: ['@jared.the.engineer1/design-system/dist/index.css'],
   });
+
+  // // 2.6 Copy design system CSS into dist
+  // console.log('📦 Copying design system CSS...');
+  // const DS_NODE_MODULE = resolve(
+  //   ROOT_DIR,
+  //   'node_modules/@jared.the.engineer1/design-system/dist'
+  // );
+  // const DS_SRC = join(DS_NODE_MODULE, 'index.css');
+  // const DS_DEST = join(OUTPUT_DIR, 'assets/css/design-system.css');
+
+  // // Ensure target folder exists
+  // await mkdir(join(OUTPUT_DIR, 'assets/css'), { recursive: true });
+
+  // console.log('Copying design system CSS from:', DS_SRC);
+  // console.log('To:', DS_DEST);
+
+  // await copyFile(DS_SRC, DS_DEST);
 
   // 3. Get all markdown files
   const postFiles = (await readdir(POSTS_DIR))

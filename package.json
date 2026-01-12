@@ -22,9 +22,6 @@
     "url": "https://github.com/jaredtheengineer1/my-blog/issues"
   },
   "homepage": "https://github.com/jaredtheengineer1/my-blog#readme",
-  "dependencies": {
-    "jaredsdesignsystem": "https://github.com/jaredtheengineer1/jaredsDesignSystem.git#v1.0.5"
-  },
   "devDependencies": {
     "@types/node": "^25.0.2",
     "browser-sync": "^3.0.4",
@@ -35,5 +32,8 @@
     "marked": "^17.0.1",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@jared.the.engineer1/design-system": "^1.0.1"
   }
 }
