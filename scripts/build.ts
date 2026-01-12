@@ -1,11 +1,13 @@
 import { copyFile, mkdir, readdir, readFile, writeFile } from 'fs/promises';
-import { join } from 'path';
+import { join, resolve } from 'path';
 import { renderPost, renderPostToFile } from './render-post';
+import { build } from 'esbuild';
 
-const POSTS_DIR = './src/posts';
-const TEMPLATES_DIR = './src/templates';
-const OUTPUT_DIR = './dist';
-const ASSETS_DIR = './src/assets';
+const ROOT_DIR = process.cwd();
+const POSTS_DIR = resolve(ROOT_DIR, 'src/posts');
+const TEMPLATES_DIR = resolve(ROOT_DIR, 'src/templates');
+const OUTPUT_DIR = resolve(ROOT_DIR, 'dist');
+const ASSETS_DIR = resolve(ROOT_DIR, 'src/assets');
 
 async function copyDirectory(src: string, dest: string): Promise<void> {
   await mkdir(dest, { recursive: true });
@@ -33,6 +35,15 @@ async function buildBlog(): Promise<void> {
   console.log('📦 Copying assets...');
   await copyDirectory(ASSETS_DIR, join(OUTPUT_DIR, 'assets'));
 
+  // 2.5 Bundle CSS (overwrites copied base.css with bundled output)
+  await build({
+    entryPoints: [join(ASSETS_DIR, 'css', 'base.css')],
+    outfile: join(OUTPUT_DIR, 'assets/css/base.css'),
+    bundle: true,
+    loader: { '.css': 'css' },
+    logLevel: 'info',
+  });
+
   // 3. Get all markdown files
   const postFiles = (await readdir(POSTS_DIR))
     .filter((file) => file.endsWith('.md'))
@@ -51,21 +62,25 @@ async function buildBlog(): Promise<void> {
   }
   // 5. Sort posts by date (newest first)
   // posts.sort((a, b) => b.date.localeCompare(a.date));
-  posts.sort((a, b) => (b.date > a.date ? -1 : 1));
+  posts.sort((a, b) => {
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
+    return dateA.getTime() < dateB.getTime() ? 1 : -1;
+  });
 
   // 6. Generate index page
   console.log('\n🏠 Generating index page...');
   const indexTemplate = await readFile(join(TEMPLATES_DIR, 'index.html'), 'utf-8');
   // Generate post list HTML
   //main
-  //case-study-section = blog-preview-section
+  //case-study-section = preview-section
   //case-study-preview = blog-preview
   const postListHtml = posts.map(
     (post) => `
     <main> 
-      <section class="blog-preview-section">
+      <section class="preview-section">
         <div class="blog-preview">
-          <h2><a href="./posts/${post.slug}.html">${post.title}</a></h2>
+          <h2><a href="./posts/${post.slug}.html" class="nav-link">${post.title}</a></h2>
           <time datetime=${post.date}">${post.date}</time>
           <p>${post.description}</p>
         </div>
